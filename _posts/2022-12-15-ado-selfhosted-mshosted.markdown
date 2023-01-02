@@ -22,5 +22,3 @@ Agents are defined as below in yaml azure pipelines.
     demands: 'selfhostedpool'
     - Agent.Name -eq dotnet-build-vm
 {% endhighlight %}
-
-

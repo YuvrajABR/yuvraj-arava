@@ -4,7 +4,6 @@ title:  "Azure pipelines variable and variable groups"
 date:   2022-12-15 12:02:06 +0530
 categories: azuredevops
 ---
-
 `variable` - Azure pipeline variable is scoped that pipeline (where its defined).
 
 {% highlight yaml %}
