@@ -7,16 +7,56 @@ categories: azuredevops
 Deploying the azure infrastuture to mulitiple subscription from same terraform configuration can be
 achieved by defining multiple provider blocks with alias.
 
-## Pre-requsites
+## Pre-Requsites
 
--  Permissions user id / app registration to subscriptions.
+-  App registration/Azure login user must be provided with permissions for both subscriptions.
 
-###### Below complete configuration, with two subcription creating resource group in each subscription.
+Assign alias as below with name of you choice, here defining `alias` as `dev`
+{% highlight terraform %}
+provider "azurerm" {
+  alias           = "dev"
+  subscription_id = "XXXXXXXX-47ef-47ec-b60a-XXXXXXXXXXX"
+  features {}
+}
+{% endhighlight %}
+
+Similarly, for other subscription assinging `alias` as `prod`.
+{% highlight terraform %}
+provider "azurerm" {
+  alias           = "prod"
+  subscription_id = "XXXXXXX-413a-4d05-ba10-XXXXXXXXXXX"
+  features {}     
+}
+{% endhighlight %}
+
+We have done defining the provider for both the subscription, Referencing the subscription with provider name as below.
+
+Referencing the `dev` subscription with `provider = azurerm.dev` attribute as below.
+
+{% highlight terraform %}
+#creating resource group in dev subscription
+resource "azurerm_resource_group" "dev" {
+  provider = azurerm.dev
+  name     = "azeus-demo-dev-rg"
+  location = "East US"
+}
+{% endhighlight %}
+
+Likewise, referencing the `prod` subscription with `provider = azurerm.prod` attribute as below.
+
+{% highlight terraform %}
+#creating resource group in dev subscription
+resource "azurerm_resource_group" "prod" {
+  provider = azurerm.prod
+  name     = "azeus-demo-prod-rg"
+  location = "East US"
+}
+{% endhighlight %}
+
+Below complete configuration, with two subcription creating resource group in each subscription.
 
 {% highlight terraform %}
 terraform {
- backend "azurerm" {
- }
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -36,7 +76,6 @@ provider "azurerm" {
   subscription_id = "XXXXXXX-413a-4d05-ba10-XXXXXXXXXXX"
   features {}     
 }
-
 
 resource "azurerm_resource_group" "dev" {
   provider = azurerm.dev
