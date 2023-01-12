@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Azure Terraform deploy to multiple subscriptions"
+title:  "Terraform deploy to multiple azure subscriptions"
 date:   2022-12-16 12:02:06 +0530
 categories: azuredevops
 ---
@@ -9,10 +9,9 @@ achieved by defining multiple provider blocks with alias.
 
 ## Pre-requsites
 
-- Having valid subscriptions
-- having permissions assigned same user id / app registration to subscriptions.
+-  Permissions user id / app registration to subscriptions.
 
-#### Below complete configuration, with two subcription creating resource group in each subscription in dev and prod.
+###### Below complete configuration, with two subcription creating resource group in each subscription in dev and prod.
 
 {% highlight terraform %}
 terraform {
