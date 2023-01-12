@@ -11,7 +11,7 @@ achieved by defining multiple provider blocks with alias.
 
 -  Permissions user id / app registration to subscriptions.
 
-###### Below complete configuration, with two subcription creating resource group in each subscription in dev and prod.
+###### Below complete configuration, with two subcription creating resource group in each subscription.
 
 {% highlight terraform %}
 terraform {
